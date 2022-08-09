@@ -7,6 +7,7 @@
 #include "insertion.h"
 #include "selection.h"
 #include "merge.h"
+#include "quick.h"
 
 // std::random_device rd;
 // unsigned int x = rd();
@@ -25,7 +26,7 @@ unsigned int xorshift32() {
     auto time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
 int main() {
-    int size {15000000};
+    int size {1000000000};
     int runs {1};
     unsigned int* arr;
     arr = new unsigned int[size];
@@ -33,13 +34,16 @@ int main() {
 
     // Insertion insert;
     // Selection select;
-    Merge merge;
+    // Merge merge;
+    Quick quick;
 
     for (int i = 0; i < runs; ++i) {
         for (int i = 0; i < size; ++i) {
-            arr[i] = xorshift32() % 10 + 1;
+            arr[i] = xorshift32() % 1000000 + 1;
         }
-        TIMER(merge.sort);
+        // printArr(arr, size);
+        TIMER(quick.sort);
+        // printArr(arr, size);
         runtime += time.count();
         std::cout << "Sort took " << time.count() << " milliseconds" << std::endl;
     }
