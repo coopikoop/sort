@@ -25,14 +25,15 @@ unsigned int xorshift32() {
     auto time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
 int main() {
-    int size {8386138};
+    int size {15000000};
     int runs {1};
-    unsigned int arr[size];
+    unsigned int* arr;
+    arr = new unsigned int[size];
     int runtime {0};
 
     // Insertion insert;
     // Selection select;
-    Merge merge;    // 8386138
+    Merge merge;
 
     for (int i = 0; i < runs; ++i) {
         for (int i = 0; i < size; ++i) {
@@ -44,4 +45,6 @@ int main() {
     }
 
     std::cout << "Average sort time: " << runtime / runs << " milliseconds" << std::endl;
+
+    delete arr;
 }
