@@ -9,6 +9,7 @@
 #include "merge.h"
 #include "quick.h"
 #include "shell.h"
+#include "bubble.h"
 
 // std::random_device rd;
 // unsigned int x = rd();
@@ -28,7 +29,7 @@ unsigned int xorshift32() {
 
 int main() {
     int size {1000000};
-    int runs {10};
+    int runs {1};
     unsigned int* arr;
     arr = new unsigned int[size];
     int runtime {0};
@@ -37,14 +38,15 @@ int main() {
     // Selection select;
     // Merge merge;
     // Quick quick;
-    Shell shell;
+    // Shell shell;
+    Bubble bubble;
 
     for (int i = 0; i < runs; ++i) {
         for (int i = 0; i < size; ++i) {
-            arr[i] = xorshift32() % 10000 + 1;
+            arr[i] = xorshift32() % 100000 + 1;
         }
         // printArr(arr, size);
-        TIMER(shell.sort);
+        TIMER(bubble.sort);
         // printArr(arr, size);
         runtime += time.count();
         std::cout << "Sort took " << time.count() << " milliseconds" << std::endl;
