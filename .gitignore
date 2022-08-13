@@ -60,3 +60,6 @@ bin/
 # Sublime
 *.sublime-project
 *.sublime-workspace
+
+# LSP
+compile_flags.txt
