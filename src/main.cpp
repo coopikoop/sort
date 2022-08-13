@@ -10,6 +10,7 @@
 #include "quick.h"
 #include "shell.h"
 #include "bubble.h"
+#include "comb.h"
 
 // std::random_device rd;
 // unsigned int x = rd();
@@ -28,7 +29,7 @@ unsigned int xorshift32() {
     auto time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
 int main() {
-    int size {1000000};
+    int size {100000000};
     int runs {1};
     unsigned int* arr;
     arr = new unsigned int[size];
@@ -39,14 +40,15 @@ int main() {
     // Merge merge;
     // Quick quick;
     // Shell shell;
-    Bubble bubble;
+    // Bubble bubble;
+    Comb comb;
 
     for (int i = 0; i < runs; ++i) {
         for (int i = 0; i < size; ++i) {
-            arr[i] = xorshift32() % 100000 + 1;
+            arr[i] = xorshift32() % 5000000 + 1;
         }
         // printArr(arr, size);
-        TIMER(bubble.sort);
+        TIMER(comb.sort);
         // printArr(arr, size);
         runtime += time.count();
         std::cout << "Sort took " << time.count() << " milliseconds" << std::endl;
