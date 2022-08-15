@@ -1,5 +1,5 @@
-#ifndef QUICK
-#define QUICK
+#ifndef QUICK_H
+#define QUICK_H
 
 class Quick {
     void quickSort(unsigned int arr[], int start, int end);

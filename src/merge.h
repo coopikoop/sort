@@ -1,5 +1,5 @@
-#ifndef MERGE
-#define MERGE
+#ifndef MERGE_H
+#define MERGE_H
 
 class Merge {
     void mergeSort(unsigned int arr[], int start, int end);

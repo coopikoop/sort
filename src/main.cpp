@@ -11,6 +11,7 @@
 #include "shell.h"
 #include "bubble.h"
 #include "comb.h"
+#include "exchange.h"
 
 // std::random_device rd;
 // unsigned int x = rd();
@@ -29,8 +30,8 @@ unsigned int xorshift32() {
     auto time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
 int main() {
-    int size {100000000};
-    int runs {1};
+    int size {100000};
+    int runs {5};
     unsigned int* arr;
     arr = new unsigned int[size];
     int runtime {0};
@@ -41,14 +42,15 @@ int main() {
     // Quick quick;
     // Shell shell;
     // Bubble bubble;
-    Comb comb;
+    // Comb comb;
+    Exchange exchange;
 
     for (int i = 0; i < runs; ++i) {
         for (int i = 0; i < size; ++i) {
-            arr[i] = xorshift32() % 5000000 + 1;
+            arr[i] = xorshift32() % 1000000 + 1;
         }
         // printArr(arr, size);
-        TIMER(comb.sort);
+        TIMER(exchange.sort);
         // printArr(arr, size);
         runtime += time.count();
         std::cout << "Sort took " << time.count() << " milliseconds" << std::endl;

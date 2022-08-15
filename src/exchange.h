@@ -1,7 +1,7 @@
-#ifndef SELECTION_H
-#define SELECTION_H
+#ifndef EXCHANGE_H
+#define EXCHANGE_H
 
-class Selection {
+class Exchange {
 public:
     void sort(unsigned int arr[], int size);
 };

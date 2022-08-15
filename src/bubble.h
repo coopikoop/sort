@@ -1,5 +1,5 @@
-#ifndef BUBBLE
-#define BUBBLE
+#ifndef BUBBLE_H
+#define BUBBLE_H
 
 class Bubble {
 public:
