@@ -1,9 +1,26 @@
 #include "merge.h"
+#include "../functions.h"
 
-void Merge::sort(unsigned int arr[], int size) {
-    int start {0};
-    int end {size};
-    mergeSort(arr, start, end);
+Merge::~Merge() {}
+
+std::chrono::nanoseconds Merge::sort(bool random) {
+    size_t size = getSize();
+    unsigned int* arr = getArr();
+    if (random) {
+        randomize(size, arr);
+    } else {
+        fill(size, arr);
+    }
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    int first {0};
+    int end = size;
+    mergeSort(arr, first, end);
+
+    auto stop = std::chrono::high_resolution_clock::now();
+
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
 }
 
 void Merge::mergeSort(unsigned int arr[], int start, int end) {
@@ -54,6 +71,10 @@ void Merge::merge(unsigned int arr[], int start, int mid, int end) {
         ++j;
         ++k;
     }
+}
+
+std::string Merge::getName() {
+    return "Merge";
 }
 
 /*

@@ -1,11 +1,17 @@
 #ifndef MERGE_H
 #define MERGE_H
 
-class Merge {
+#include "../sort.h"
+
+class Merge : Sort {
     void mergeSort(unsigned int arr[], int start, int end);
     void merge(unsigned int arrp[], int start, int mid, int end);
 public:
-    void sort(unsigned int arr[], int size);
+    using Sort::Sort;
+    ~Merge();
+
+    std::chrono::nanoseconds sort(bool random);
+    std::string getName();
 };
 
 #endif

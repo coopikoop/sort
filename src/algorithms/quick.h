@@ -1,11 +1,17 @@
 #ifndef QUICK_H
 #define QUICK_H
 
-class Quick {
+#include "../sort.h"
+
+class Quick : Sort{
     void quickSort(unsigned int arr[], int start, int end);
     int partition(unsigned int arr[], int start, int end);
 public:
-    void sort(unsigned int arr[], int size);
+    using Sort::Sort;
+    ~Quick();
+
+    std::chrono::nanoseconds sort(bool random);
+    std::string getName();
 };
 
 #endif
