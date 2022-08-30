@@ -12,19 +12,19 @@ std::chrono::nanoseconds Quick::sort(bool random) {
         fill(size, arr);
     }
 
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::steady_clock::now();
 
     int first {0};
     int end = size - 1;
     quickSort(arr, first, end);
 
-    auto stop = std::chrono::high_resolution_clock::now();
+    auto stop = std::chrono::steady_clock::now();
 
     return std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
 }
 
 void Quick::quickSort(unsigned int arr[], int start, int end) {
-    if (end - start <= 1) {
+    if (start >= end) {
         return;
     }
 
@@ -39,7 +39,7 @@ int Quick::partition(unsigned int arr[], int start, int end) {
     int i = start - 1;
 
     for (int j = start; j < end; ++j) {
-        if (arr[j] < pivot) {
+        if (arr[j] <= pivot) {
             ++i;
             swap(arr[i], arr[j]);
         }

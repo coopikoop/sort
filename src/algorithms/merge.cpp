@@ -12,13 +12,13 @@ std::chrono::nanoseconds Merge::sort(bool random) {
         fill(size, arr);
     }
 
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::steady_clock::now();
 
     int first {0};
     int end = size;
     mergeSort(arr, first, end);
 
-    auto stop = std::chrono::high_resolution_clock::now();
+    auto stop = std::chrono::steady_clock::now();
 
     return std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
 }
@@ -30,12 +30,16 @@ void Merge::mergeSort(unsigned int arr[], int start, int end) {
     int mid {start + (end - start) / 2};
     mergeSort(arr, start, mid);
     mergeSort(arr, mid + 1, end);
-    merge(arr, start, mid, end);
+    if (getSize() > 16772287) {
+        mergeHeap(arr, start, mid, end);
+    }
+    mergeStack(arr, start, mid, end);
 }
 
-void Merge::merge(unsigned int arr[], int start, int mid, int end) {
+void Merge::mergeStack(unsigned int arr[], int start, int mid, int end) {
     int arr1size {mid - start + 1};
     int arr2size {end - mid};
+
     unsigned int arr1[arr1size];
     unsigned int arr2[arr2size];
 
@@ -71,6 +75,50 @@ void Merge::merge(unsigned int arr[], int start, int mid, int end) {
         ++j;
         ++k;
     }
+}
+
+void Merge::mergeHeap(unsigned int arr[], int start, int mid, int end) {
+    int arr1size {mid - start + 1};
+    int arr2size {end - mid};
+
+    unsigned int* arr1 = new unsigned int[arr1size];
+    unsigned int* arr2 = new unsigned int[arr2size];
+
+    for (int i = 0; i < arr1size; ++i)
+        arr1[i] = arr[start + i];
+    for (int i = 0; i < arr2size; ++i)
+        arr2[i] = arr[mid + i + 1];
+
+    int i = 0;
+    int j = 0;
+    int k = start;
+
+    while (i < arr1size && j < arr2size) {
+        if (arr1[i] <= arr2[j]) {
+            arr[k] = arr1[i];
+            ++i;
+            ++k;
+        } else {
+            arr[k] = arr2[j];
+            ++j;
+            ++k;
+        }
+    }
+
+    while (i < arr1size) {
+        arr[k] = arr1[i];
+        ++i;
+        ++k;
+    }
+
+    while (j < arr2size) {
+        arr[k] = arr2[j];
+        ++j;
+        ++k;
+    }
+
+    delete[] arr1;
+    delete[] arr2;
 }
 
 std::string Merge::getName() {

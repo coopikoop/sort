@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <algorithm>
 
 #include "functions.h"
 
@@ -33,7 +34,10 @@ void randomize(size_t size, unsigned int arr[]) {
 }
 
 void fill(size_t size, unsigned int arr[]) {
-    for (int i = 1; i <= size; ++i) {
-        arr[i - 1] = i;
+    for (int i = 0; i < size; ++i) {
+        arr[i] = i;
     }
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(&arr[0], &arr[size], g);
 }

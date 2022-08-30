@@ -25,7 +25,7 @@ std::chrono::nanoseconds Shell::sort(bool random) {
         fill(size, arr);
     }
 
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::steady_clock::now();
 
     for (int gapIndex = getGaps(size); gapIndex >= 0; --gapIndex) {
         int gap = gapsArr[gapIndex];
@@ -39,7 +39,7 @@ std::chrono::nanoseconds Shell::sort(bool random) {
         }
     }
 
-    auto stop = std::chrono::high_resolution_clock::now();
+    auto stop = std::chrono::steady_clock::now();
 
     return std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
 }

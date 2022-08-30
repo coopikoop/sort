@@ -12,7 +12,7 @@ std::chrono::nanoseconds Selection::sort(bool random) {
         fill(size, arr);
     }
 
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::steady_clock::now();
 
     for (int i = 0; i < size; ++i) {
         int min = i;
@@ -24,7 +24,7 @@ std::chrono::nanoseconds Selection::sort(bool random) {
         swap(arr[min], arr[i]);
     }
 
-    auto stop = std::chrono::high_resolution_clock::now();
+    auto stop = std::chrono::steady_clock::now();
 
     return std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
 }
