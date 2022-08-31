@@ -3,7 +3,7 @@
 #include "sortingAlgs.h"
 
 // Maximum size of 2147483647(2^31 - 1)
-size_t size {2147483647};
+size_t size {100000000};
 
 int runs {1};
 
@@ -79,12 +79,19 @@ double sort(const bool random) {
 int main() {
     const bool random = false;
 
+    if (size > 2147483647) {
+        size = 2147483647;
+        std::cout << "WARNING: Array size was greater than 2147483647, "
+                  << "has been set to 2147483647" << std::endl;
+    }
+
     // sort<Bubble>(random);
     // sort<Comb>(random);
     // sort<Exchange>(random);
+    sort<Heap>(random);
     // sort<Insertion>(random);
     // sort<Merge>(random);
-    sort<Quick>(random);
+    // sort<Quick>(random);
     // sort<Selection>(random);
     // sort<Shell>(random);
 }
