@@ -54,7 +54,7 @@ dkms.conf
 # MacOS
 .DS_Store
 
-# Me
+# Binaries folder
 bin/
 
 # Sublime
@@ -63,3 +63,6 @@ bin/
 
 # LSP
 compile_flags.txt
+
+# Log file
+log.txt

@@ -32,8 +32,9 @@ void Merge::mergeSort(unsigned int arr[], int start, int end) {
     mergeSort(arr, mid + 1, end);
     if (getSize() > 16772287) {
         mergeHeap(arr, start, mid, end);
+    } else {
+        mergeStack(arr, start, mid, end);
     }
-    mergeStack(arr, start, mid, end);
 }
 
 void Merge::mergeStack(unsigned int arr[], int start, int mid, int end) {

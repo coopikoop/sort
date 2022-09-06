@@ -1,11 +1,12 @@
 #include <iostream>
+#include <fstream>
 
 #include "sortingAlgs.h"
 
 // Maximum size of 2147483647(2^31 - 1)
-size_t size {100000000};
+size_t size {100000};
 
-int runs {1};
+int runs {10};
 
 double runtime {0};
 double timeScaleDivisor;
@@ -34,12 +35,12 @@ void getTimeScale(double time) {
 }
 
 template <class Algorithm>
-double sort(const bool random) {
+double sort(const bool random, const bool log) {
     Algorithm algorithm(size);
     runtime = 0;
 
     if (!algorithm.getName().compare("Merge") && size > 16772287) {
-        std::cout << "WARNING: Merge sort will be significantly slower because heap allocation "
+        std::cerr << "WARNING: Merge sort will be significantly slower because heap allocation "
                   << "will be used rather than stack allocation. Use a size less than 16,772,288 "
                   << "for faster and more accurate results." << std::endl;
     }
@@ -64,34 +65,51 @@ double sort(const bool random) {
         }
         double averageTime = runtime / runs;
         std::cout << algorithm.getName() << " sort average time: " << averageTime << ' ' << timeScale << std::endl;
-
+        if (log) {
+            std::clog << "Sort:         " << algorithm.getName() << '\n'
+                      << "Average time: " << averageTime << ' ' << timeScale << '\n'
+                      << "Total time:   " << runtime << ' ' << timeScale << '\n' << std::endl;
+        }
         return averageTime * timeScaleDivisor;
     } else {
         double time = algorithm.sort(random).count();
         getTimeScale(time);
         time /= timeScaleDivisor;
         std::cout << algorithm.getName() << " sort took " << time << ' ' << timeScale << std::endl;
-
+        if (log) {
+            std::clog << "Sort:         " << algorithm.getName() << '\n'
+                      << "# of runs:    " << runs << '\n'
+                      << "Time:         " << time << ' ' << timeScale << '\n' << std::endl;
+        }
         return time * timeScaleDivisor;
     }
 }
 
 int main() {
     const bool random = false;
+    const bool log = true;
+
+    std::ofstream out("log.txt");
+    std::clog.rdbuf(out.rdbuf());
+
+    if (log) {
+        std::clog << "# of runs:    " << runs << '\n' << std::endl;
+    }
 
     if (size > 2147483647) {
         size = 2147483647;
-        std::cout << "WARNING: Array size was greater than 2147483647, "
+        std::cerr << "WARNING: Array size was greater than 2147483647, "
                   << "has been set to 2147483647" << std::endl;
     }
 
-    // sort<Bubble>(random);
-    // sort<Comb>(random);
-    // sort<Exchange>(random);
-    sort<Heap>(random);
-    // sort<Insertion>(random);
-    // sort<Merge>(random);
-    // sort<Quick>(random);
-    // sort<Selection>(random);
-    // sort<Shell>(random);
+    //sort<Bubble>(random, log);
+    //sort<Comb>(random, log);
+    sort<Counting>(random, log);
+    sort<Exchange>(random, log);
+    sort<Heap>(random, log);
+    sort<Insertion>(random, log);
+    sort<Merge>(random, log);
+    sort<Quick>(random, log);
+    sort<Selection>(random, log);
+    sort<Shell>(random, log);
 }
