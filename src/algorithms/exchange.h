@@ -3,7 +3,7 @@
 
 #include "../sort.h"
 
-class Exchange : Sort{
+class Exchange : public Sort{
 public:
     using Sort::Sort;
     ~Exchange();

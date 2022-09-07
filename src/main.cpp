@@ -4,9 +4,9 @@
 #include "sortingAlgs.h"
 
 // Maximum size of 2147483647(2^31 - 1)
-size_t size {100000};
+size_t size {1000000};
 
-int runs {10};
+int runs {5};
 
 double runtime {0};
 double timeScaleDivisor;
@@ -78,8 +78,7 @@ double sort(const bool random, const bool log) {
         std::cout << algorithm.getName() << " sort took " << time << ' ' << timeScale << std::endl;
         if (log) {
             std::clog << "Sort:         " << algorithm.getName() << '\n'
-                      << "# of runs:    " << runs << '\n'
-                      << "Time:         " << time << ' ' << timeScale << '\n' << std::endl;
+                      << "Time:         " << time << ' ' << timeScale << std::endl;
         }
         return time * timeScaleDivisor;
     }
@@ -93,7 +92,9 @@ int main() {
     std::clog.rdbuf(out.rdbuf());
 
     if (log) {
-        std::clog << "# of runs:    " << runs << '\n' << std::endl;
+        std::clog << "# of runs:    " << runs << '\n'
+                  << "Array size:   " << size << '\n'
+                  << "Randomized:   " << (random ? "Yes" : "No") << '\n' << std::endl;
     }
 
     if (size > 2147483647) {
@@ -102,14 +103,14 @@ int main() {
                   << "has been set to 2147483647" << std::endl;
     }
 
-    //sort<Bubble>(random, log);
-    //sort<Comb>(random, log);
-    sort<Counting>(random, log);
-    sort<Exchange>(random, log);
-    sort<Heap>(random, log);
-    sort<Insertion>(random, log);
-    sort<Merge>(random, log);
-    sort<Quick>(random, log);
-    sort<Selection>(random, log);
-    sort<Shell>(random, log);
+    // sort<Bubble>(random, log);
+    // sort<Comb>(random, log);
+    sort<Counting>(random, log); // Some errors with multiple sorts, cannot figure out.
+    // sort<Exchange>(random, log);
+    // sort<Heap>(random, log);
+    // sort<Insertion>(random, log);
+    // sort<Merge>(random, log);
+    // sort<Quick>(random, log);
+    // sort<Selection>(random, log);
+    // sort<Shell>(random, log);
 }

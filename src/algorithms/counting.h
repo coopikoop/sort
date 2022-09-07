@@ -3,7 +3,7 @@
 
 #include "../sort.h"
 
-class Counting : Sort {
+class Counting : public Sort {
     void countingSort(unsigned int arr[], size_t size);
 public:
     using Sort::Sort;

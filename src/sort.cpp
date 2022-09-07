@@ -12,7 +12,7 @@ Sort::Sort(size_t size) {
 }
 
 Sort::~Sort() {
-    delete arr;
+    delete[] arr;
 }
 
 size_t Sort::getSize() {

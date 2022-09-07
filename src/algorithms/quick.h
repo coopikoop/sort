@@ -3,7 +3,7 @@
 
 #include "../sort.h"
 
-class Quick : Sort{
+class Quick : public Sort{
     void quickSort(unsigned int arr[], int start, int end);
     int partition(unsigned int arr[], int start, int end);
 public:

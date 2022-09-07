@@ -3,7 +3,7 @@
 
 #include "../sort.h"
 
-class Shell : Sort{
+class Shell : public Sort{
     int getGaps(int size);
 public:
     using Sort::Sort;

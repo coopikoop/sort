@@ -3,7 +3,7 @@
 
 #include "../sort.h"
 
-class Insertion : Sort{
+class Insertion : public Sort{
 public:
     using Sort::Sort;
     ~Insertion();

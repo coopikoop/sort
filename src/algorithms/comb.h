@@ -3,7 +3,7 @@
 
 #include "../sort.h"
 
-class Comb : Sort{
+class Comb : public Sort{
     int nextGap(int gap);
 public:
     using Sort::Sort;

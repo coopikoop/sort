@@ -3,7 +3,7 @@
 
 #include "../sort.h"
 
-class Bubble : Sort {
+class Bubble : public Sort {
 public:
     using Sort::Sort;
     ~Bubble();

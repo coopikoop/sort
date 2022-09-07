@@ -6,6 +6,7 @@
 #include <string>
 
 class Sort {
+private:
     unsigned int* arr;
     size_t size;
 
